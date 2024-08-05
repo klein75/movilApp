@@ -1,0 +1,43 @@
+cuando es supervisor  nos vamos a supervisores ye administradores
+buscamos 
+
+||confenaco_ numero de documento cunado es de cali 
+
+
+cuando es ususario administrativo se deja el mismo nombre yen el usuario 
+
+
+la ruta seria 
+tranky
+
+--|usuarios
+----|agentes 
+------\ser crea agentes 
+
+
+
+en agentes solo se crean agentes 
+solo en rol agente 
+
+
+
+
+
+
+usuario __\ usuario 
+
+supervisosr o administrador 
+
+
+super user 
+
+cuando se crea un usuario siempre agente siempre se agretan aun grupo de seguriodad en seguridad y data
+
+
+cuando sean licencias se pide autorizacionde lorena jefe 
+
+
+
+
+
+%%compartidas 
