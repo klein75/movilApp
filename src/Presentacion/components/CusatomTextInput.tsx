@@ -52,3 +52,4 @@ const styles = StyleSheet.create({
 export const CusatomTextInput = () => {
   return <div>CusatomTextInput</div>;
 };
+//hola que hace
