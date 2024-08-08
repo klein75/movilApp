@@ -13,6 +13,8 @@ import { RootStackParamList } from "../../../../App";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import useViewModel from './viewModel'
+import { CustomTextInput } from '../../components/CusatomTextInput';
+import styles from './Styles'
 
 export const HomeScreen = () => {
   const {email, password, onChange
@@ -35,38 +37,33 @@ export const HomeScreen = () => {
 
       <View style={styles.form}>
         <Text style={styles.formText}>INGRESAR</Text>
-        <View style={styles.formInput}>
-          <Image
-            style={styles.formIcon}
-            source={require("../../../../assets/imagen3.jpg")}
-          />
-          <TextInput
-            style={styles.formTextInput}
+      
+          <CustomTextInput
+          image= {require("../../../../assets/imagen3.jpg")}
             placeholder="Correo electrónico"
-            keyboardType="email-address"
-            value={email}
-            onChangeText={text => onChange('email',text)}
+            KeyboardType="email-address"
+            property="email"
+            onChangeText={onChange}
+            value ={email}
           />
-        </View>
-        <View style={styles.formInput}>
-          <Image
-            style={styles.formIcon}
-            source={require("../../../../assets/imagen4.jpg")}
-          />
-          <TextInput
-            style={styles.formTextInput}
+          <CustomTextInput
+          image= {require("../../../../assets/imagen4.jpg")}
             placeholder="Contraseña"
-            keyboardType="default"
-            secureTextEntry={true}
+            KeyboardType="default"
+            property="password"
+            onChangeText={onChange}
             value={password}
-            onChangeText={text => onChange("password",text)}
+            secureTextEntry={true}
+           
           />
         </View>
 
         <View style={{ marginTop: 30 }}>
           <RoundedButton
             text="ENTRAR"
-            onPress={() => ToastAndroid.show("HOLA!", ToastAndroid.SHORT)}
+            onPress={()=>{console.log('email'+ email)
+              console.log('passdword'+ password);   
+            }}
           />
         </View>
 
@@ -79,78 +76,7 @@ export const HomeScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-  },
-  imageBackground: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.7,
-    bottom: "30%",
-  },
-  form: {
-    width: "100%",
-    height: "40%",
-    backgroundColor: "white",
-    position: "absolute",
-    bottom: 0,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    padding: 30,
-  },
-  formText: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  formIcon: {
-    width: 25,
-    height: 25,
-    marginTop: 5,
-  },
-  formInput: {
-    flexDirection: "row",
-    marginTop: 30,
-  },
-  formTextInput: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: "#AAAAAA",
-    marginLeft: 15,
-  },
-  formRegister: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 30,
-  },
 
-  formRegisterText: {
-    fontStyle: "italic",
-    color: "orange",
-    borderBottomWidth: 1,
-    borderBottomColor: "orange",
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
-  logoContainer: {
-    position: "absolute",
-    alignSelf: "center",
-    top: "15%",
-  },
-  logoImage: {
-    width: 100,
-    height: 100,
-  },
-  logoText: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 20,
-    marginTop: 10,
-    fontWeight: "bold",
-  },
-});

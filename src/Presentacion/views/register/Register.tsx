@@ -10,11 +10,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { RoundedButton } from "../../components/RoundedButton";
-import { RootStackParamList } from "../../../../App";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import useViemModel from './viewModel';
+import {  CustomTextInput } from "../../components/CusatomTextInput";
+import { KeyboardType } from 'react-native';
+import styles from './Styles'
+
 
 export const RegisterScreen = () => {
+  const {name, lastname, phone, email, password, confimPassword, onChange, register} = useViemModel();
+
+  
   return (
     <View style={styles.container}>
       <Image
@@ -31,157 +36,72 @@ export const RegisterScreen = () => {
 
       <View style={styles.form}>
         <Text style={styles.formText}>REGISTRARSE</Text>
-
-        <View style={styles.formInput}>
-          <Image
-            style={styles.formIcon}
-            source={require("../../../../assets/user.png")}
-          />
-          <TextInput
-            style={styles.formTextInput}
-            placeholder="Nombres"
-            keyboardType="default"
-          />
         </View>
-
-        <View style={styles.formInput}>
-          <Image
-            style={styles.formIcon}
-            source={require("../../../../assets/my_user.png")}
-          />
-          <TextInput
-            style={styles.formTextInput}
-            placeholder="Apellidos"
-            keyboardType="default"
-          />
-        </View>
-
-        <View style={styles.formInput}>
-          <Image
-            style={styles.formIcon}
-            source={require("../../../../assets/email.png")}
-          />
-          <TextInput
-            style={styles.formTextInput}
-            placeholder="Correo Electronico"
-            keyboardType="email-address"
-          />
-        </View>
-        <View style={styles.formIcon}>
-          <Image
-            style={styles.formIcon}
-            source={require("../../../../assets/phone.png")}
-          />
-          <TextInput
-            style={styles.formTextInput}
-            placeholder="Telefono"
-            keyboardType="numeric"
-          />
-        </View>
-        <View style={styles.formInput}>
-          <Image
-            style={styles.formIcon}
-            source={require("../../../../assets/password.png")}
-          />
-          <TextInput
-            style={styles.formInput}
-            placeholder="contraseña"
-            keyboardType="default"
-            secureTextEntry={true}
-          />
-        </View>
-      </View>
-      <View style={styles.formInput}>
-        <Image
-          style={styles.formIcon}
-          source={require("../../../../assets/confirm_password.png")}
+        
+       <CustomTextInput
+       image={require('../../../../assets/user.png')}
+       placeholder="Nombres"
+       KeyboardType="default"
+       property="name"
+       onChangeText={onChange}
+       value={name}
+       />
+     
+      <CustomTextInput
+        image={require('../../../../assets/user.png')}
+        placeholder='Apellidos'
+        KeyboardType='default'
+        property='lastname'
+        onChangeText={onChange}
+        value = {lastname}
         />
-        <TextInput
-          style={styles.formInput}
-          placeholder="Confirmar contraseña"
-          keyboardType="default"
-          secureTextEntry={true}
+      
+        <CustomTextInput
+        image={require("../../../../assets/email.png")}
+        placeholder= 'correo Electronico'
+        KeyboardType='default'
+        property="email"
+        onChangeText={onChange}
+        value={email}
+          />
+        
+        <CustomTextInput
+        image={require("../../../../assets/phone.png")}
+        placeholder="Telefono"
+        KeyboardType="numeric"
+        property="phone"
+        onChangeText={onChange}
+        value={phone}
         />
-      </View>
+          
+        <CustomTextInput
+        image={require("../../../../assets/password.png")}
+        placeholder="Contraseña"
+        KeyboardType="default"
+        property="password"
+        onChangeText={onChange}
+        value={password}
+        secureTextEntry={true}
+        />
+       
+
+       <CustomTextInput
+      image={require("../../../../assets/confirm_password.png")}
+      placeholder="Confirmar Contraseña"
+      KeyboardType="default"
+      property="confirmPassword"
+      onChangeText={onChange}
+      value={confimPassword}
+      secureTextEntry={true}
+        />
+       
       <View style={{ marginTop: 30 }}>
         <RoundedButton
           text="confirmar"
-          onPress={() => ToastAndroid.show("HOLA!", ToastAndroid.SHORT)}
+          onPress={() => register()}
         />
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-  },
-  imageBackground: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.7,
-    bottom: "30%",
-  },
-  form: {
-    width: "100%",
-    height: "80%",
-    backgroundColor: "white",
-    position: "absolute",
-    bottom: 0,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    padding: 30,
-  },
-  formText: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  formIcon: {
-    width: 25,
-    height: 25,
-    marginTop: 5,
-  },
-  formInput: {
-    flexDirection: "row",
-    marginTop: 30,
-  },
-  formTextInput: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: "#AAAAAA",
-    marginLeft: 15,
-  },
-  formRegister: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 30,
-  },
-
-  formRegisterText: {
-    fontStyle: "italic",
-    color: "orange",
-    borderBottomWidth: 1,
-    borderBottomColor: "orange",
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
-  logoContainer: {
-    position: "absolute",
-    alignSelf: "center",
-    top: "15%",
-    alignItems: "center",
-  },
-  logoImage: {
-    width: 100,
-    height: 100,
-  },
-  logoText: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 20,
-    marginTop: 10,
-    fontWeight: "bold",
-  },
-});

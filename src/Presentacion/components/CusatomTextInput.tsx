@@ -19,6 +19,7 @@ export const CustomTextInput = ({
   property,
   onChangeText,
 }: Props) => {
+  return(
   <View style={styles.formInput}>
     <Image style={styles.formIcon} source={image} />
     <TextInput
@@ -29,7 +30,8 @@ export const CustomTextInput = ({
       onChangeText={(text) => onChangeText(property, text)}
       secureTextEntry={secureTextEntry}
     />
-  </View>;
+  </View>
+  )
 };
 const styles = StyleSheet.create({
   formIcon: {
@@ -49,7 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const CusatomTextInput = () => {
-  return <div>CusatomTextInput</div>;
-};
 //hola que hace
