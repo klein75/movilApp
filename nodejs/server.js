@@ -1,18 +1,29 @@
 const express = require('express');
+const session = require('express-session');
 const passport = require('passport');
 
+
 const app = express();
+app.use(session({
+    secret: 'tu-clave-secreta', // Cambia esto a una clave secreta más segura
+    resave: false,
+    saveUninitialized: false,
+    // Otras opciones según tus necesidades
+}));
 const http = require('http');
 const server = http.createServer(app);
 const logger = require('morgan');
 const cors = require('cors');
+
 
 /**	
  * Importar rutas
  */
 const usersRoutes = require('./routes/userRoutes');
 
+
 const port = process.env.PORT || 3000;
+
 
 app.use(logger('dev'));  // log requests to the console DEBUG
 app.use(express.json()); // support json encoded bodies
@@ -23,21 +34,27 @@ app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 require('./config/passport')(passport);
+
 
 app.disable('x-powered-by'); // disable the X-Powered-By header in responses
 
+
 app.set('port', port);
+
 
 /**
  * Llamar a las rutas
  */
 usersRoutes(app);
 
+
 // Iniciar el servidor
 server.listen(port, '192.168.1.121' || 'localhost', function() {
     console.log('App Node.js ' + process.pid + ' ejecutando en ' + server.address().address + ':' + server.address().port);
 });
+
 
 /** RUTAS ***********************************************/
 app.get('/', (req, res) => {
@@ -45,12 +62,18 @@ app.get('/', (req, res) => {
 });
 
 
+
+
 app.get('/test', (req, res) => {
     res.send('Estas en la ruta TEST');
 });
+
 
 //Manejo de errores ******************************************
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(err.status || 500).send(err.stack);
 });
+
+
+//en package.json se cambio "passport": "^0.7.0", a "passport": "^0.4.1",

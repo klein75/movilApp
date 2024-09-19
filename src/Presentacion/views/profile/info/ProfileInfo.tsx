@@ -2,9 +2,11 @@ import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { RootStackParamList } from '../../../../../App';
-import useViewModel from '../../home/viewModel';
+import useViewModel from './ViewModel';
+
 
 interface Props extends StackScreenProps<RootStackParamList, 'ProfileInfoScreen'> { };
+
 
 export const ProfileInfoScreen = ({ navigation, route }: Props) => {
     const { removeSession } = useViewModel();
@@ -20,4 +22,3 @@ export const ProfileInfoScreen = ({ navigation, route }: Props) => {
         </View>
     )
 }
-
